@@ -1,0 +1,48 @@
+{% block content %}
+	  <!-- Button trigger modal -->
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content container-fluid">
+      <div class="modal-header">
+
+        <h1 class="legend" style="font-size: 24pt;">Add a Course</h1>
+        
+      </div>
+
+
+        <form action ="/add_course" method="POST" >
+                {{ form.hidden_tag() }}
+            
+            <fieldset style="border: none;" >
+                <div>
+                    {{ form.course_code.label(class = "field_label0") }}
+                    {{ form.course_code(class = "field") }}
+                </div>
+                <div>
+                    {{ form.course_name.label(class = "field_label0") }}
+                    {{ form.course_name(class = "field") }}
+                </div>
+                
+                <div>
+                    {{ form.college.label(class = "field_label0") }}
+                    {{ form.college(class = "field") }}
+                </div>
+               
+            
+           		
+            
+            </fieldset>
+
+            <div class="modal-footer">
+                {{ form.submit(class = "submit_button") }}
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+        </form>
+        
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

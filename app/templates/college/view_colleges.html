@@ -1,0 +1,92 @@
+{% extends 'layout.html' %}
+{% include 'college/add_college.html' %}
+{% block content %}
+    <div class="_navbar">
+        <img src = "{{ url_for('static',filename = 'img/SSiS.png') }}" class = "imglogo">
+        <nav>
+            <ul class="nav justify-content-end" style="padding-right: 13%;padding-top: 15px;">
+                <li class="nav-item">
+                    <a class="linka nav-link" href="{{ url_for('view_students') }}">STUDENT</a>
+                </li>
+                <li class="nav-item">
+                    <a class="linka nav-link" href="{{ url_for('view_courses') }}">COURSES</a>
+                </li>
+                <li class="nav-item aktibo">
+                    <a class="linka nav-link active_link" href="#">COLLEGES</a>
+                </li>
+  
+            </ul>
+        </nav>
+    </div>
+    <div class="add_student ">
+        <button class="add_student_btn" data-toggle="modal" data-target="#exampleModal">Add College</button>
+    </div>
+    <div class="search_actions">
+        <div>
+            {{ search_form.search_field(class="search_field") }}
+        </div>
+        <div>
+            {{ search_form.search_by.label(class="search_by_label") }}
+            {{ search_form.search_by(class="college_search_by") }}
+        </div>
+        <div>
+            {{ search_form.search_submit(class="search_submit_btn") }}
+        </div>
+    </div>
+    <div class="data_list bodybg">
+     <table id="example" class="table table-bordered table-responsive table-striped table-wrapper-scroll-y my-custom-scrollbar" style="width:100%">
+        <thead>
+            <tr">
+                <th style="padding-left: 60px; "scope="col">College Code</th>
+                <th scope="col">College name</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+                {% for item in colleges_data %}
+                <tr>
+                    <td style="padding-left: 60px;" scope="row">{{ item['college_code'] }}</td>
+                    <td>{{ item['college_name'] }}</td>
+                    <td>
+
+                        <button onclick="edit_student()" class="btn btn-outline-primary rounded" style="padding: 5px 10px 5px 10px;">Update</button>
+                        <button onclick="del_student()" 
+                        class="btn btn-outline-danger rounded" 
+                        data-toggle="modal" 
+                        data-target="#modal_delete_{{ item['college_code'] }}" 
+                        style="padding: 5px 10px 5px 10px" >Delete</button>
+                    </td>
+
+                    <div class="modal fade" id="modal_delete_{{ item['college_code'] }}">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="#modal_delete_title_{{ item['college_code'] }}">Delete Student</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="border-style:none">
+                                    <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                    <div class="modal-body">
+                                        <p>Are you sure you want to delete this student?</p>
+                                    </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                    <a href="{{ url_for('del_college',college_code = item['college_code']) }}">
+                                    <input type="submit" value="Delete" class="btn btn-danger">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                  </div>
+                    </td>
+                       
+                </tr>
+                {% endfor %}
+                
+
+        </tbody>
+        
+    </table>
+  </div>
+
+{% endblock content %}
