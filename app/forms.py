@@ -5,13 +5,13 @@ from wtforms.validators import DataRequired, Length, Email, EqualTo, InputRequir
 
 class StudentForm(FlaskForm):
 	first_name = StringField('Name', 
-							validators=[DataRequired(), Length(min = 2, max =20)],
+							validators=[DataRequired(), Length(min=2, max=20)],
 							render_kw ={"placeholder": "First name"})
 	last_name = StringField('Last name',
-							validators = [DataRequired(),Length(min = 2, max =20)],
+							validators = [DataRequired(),Length(min=2, max=20)],
 							render_kw = {"placeholder": "Last name"})
 	id_number = StringField('Identification Number',
-							validators=[DataRequired(), Length(min = 8, max = 9)],
+							validators=[DataRequired(), Length(min=8, max=9)],
 							render_kw = {"placeholder": "ID Number"})
 	course = SelectField('Course', 
 							choices = [])
@@ -31,19 +31,21 @@ class StudentForm(FlaskForm):
 
 class CoursesForm(FlaskForm):
 	course_code = StringField('Course Code', 
-							validators=[DataRequired(), Length(min = 4, max =15)])
-	course_name = StringField('College Name',
-							validators = [DataRequired(),Length(min = 10, max =90)])
+							validators=[DataRequired(), Length(min=3, max =15)])
+	course_name = StringField('Course Name',
+							validators = [DataRequired(),Length(min=10, max =90)])
 	college = SelectField('College Department',
 							choices=[])
 	submit = SubmitField('Submit')
 
 class CollegeForm(FlaskForm):
-	college_code = StringField('Course Code', 
-							validators=[DataRequired(), Length(min = 4, max =8)])
-	college_name = StringField('Course Name',
-							validators = [DataRequired(),Length(min = 10, max =50)])
+	college_code = StringField('College Code', 
+							validators=[DataRequired(), Length(min=3, max=8)])
+	college_name = StringField('College Name',
+							validators = [DataRequired(),Length(min=10, max=90)])
 	submit = SubmitField('Submit')
+
+
 
 class SearchStudentForm(FlaskForm):
 	search_field = StringField(label='search',

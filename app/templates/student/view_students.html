@@ -19,6 +19,7 @@
             </ul>
         </nav>
     </div>
+
     <div class="add_student">
         <button class="add_student_btn" data-toggle="modal" data-target="#exampleModal">Add Student</button>
     </div>
@@ -35,20 +36,22 @@
         </div>
     </div>
 	<div class="data_list bodybg">
-  	 <table id="example" class="table table-bordered table-responsive table-striped table-wrapper-scroll-y my-custom-scrollbar" style="width:100%">
-        <thead>
-            <tr">
-                <th style="padding-left: 60px; "scope="col">ID Number</th>
-                <th scope="col">First name</th>
-                <th scope="col">Last name</th>
-                <th scope="col">Course</th>
-                <th scope="col">Year Level</th>
-                <th scope="col">Gender</th>
-                <th scope="col">Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        		{% for item in students_data %}
+  	     <table id="example" 
+                class="table table-bordered table-responsive table-striped table-wrapper-scroll-y my-custom-scrollbar" 
+                style="width:100%">
+            <thead>
+                <tr>
+                    <th style="padding-left: 60px; "scope="col">ID Number</th>
+                    <th scope="col">First name</th>
+                    <th scope="col">Last name</th>
+                    <th scope="col">Course</th>
+                    <th scope="col">Year Level</th>
+                    <th scope="col">Gender</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in students_data %}
         		<tr>
         			<td style="padding-left: 60px;" scope="row">{{ item['id_number'] }}</td>
         			<td>{{ item['first_name'] }}</td>
@@ -56,12 +59,13 @@
         			<td>{{ item['course'] }}</td>
         			<td>{{ item['year_level'] }}</td>
         			<td>{{ item['gender'] }}</td>
-        			<td><a style="text-decoration: none;" href="#"><button 
-                        onclick="edit_student()" 
+        			<td>
+                        <a style="text-decoration: none;" href="{{ url_for('edit_student',id_number = item['id_number']) }}">
+                        <button 
                         class="btn btn-outline-primary rounded" 
                         style="padding: 5px 10px 5px 10px;">Update</button>
                         </a>
-                        <button onclick="del_student()" 
+                        <button
                         class="btn btn-outline-danger rounded" 
                         data-toggle="modal" 
                         data-target="#modal_delete_{{ item['id_number'] }}" 
@@ -88,16 +92,12 @@
                                 </div>
                             </div>
                         </div>
-                  </div>
-                        
+                    </div>       
         		</tr>
-        		{% endfor %}
-        		
-
-        </tbody>
-        
-    </table>
-  </div>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 
 
 {% endblock content %}

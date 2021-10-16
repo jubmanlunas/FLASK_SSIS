@@ -1,0 +1,49 @@
+
+{% extends 'layout.html' %}
+{% block content %}
+<div class="_navbar">
+        <img src = "{{ url_for('static',filename = 'img/SSiS.png') }}" class = "imglogo">
+        <nav>
+            <ul class="nav justify-content-end" style="padding-right: 13%;padding-top: 15px;">
+                <li class="nav-item">
+                    <a class="linka nav-link" href="{{ url_for('view_students') }}">STUDENT</a>
+                </li>
+                <li class="nav-item">
+                    <a class="linka nav-link" href="{{ url_for('view_courses') }}">COURSES</a>
+                </li>
+                <li class="nav-item aktibo">
+                    <a class="linka nav-link active_link" href="#">COLLEGES</a>
+                </li>
+  
+            </ul>
+        </nav>
+    </div>
+
+<div class="container-fluid">
+    <div class="container update_div" style="width:40%">
+        <div class="container" style="text-align: center;">
+            <h1>Update College</h1>
+        </div>
+        <form action ="edit_college" method="POST" >
+            {{ form.hidden_tag() }}
+            <fieldset style="border: none;" >
+                <div style="display:none;">
+                    {{ form.college_code.label(class = "field_label0") }}
+                    {{ form.college_code(class = "field") }}
+                </div>
+                <div>
+                    {{ form.college_name.label(class = "field_label0") }}
+                    {{ form.college_name(class = "field") }}
+                </div>
+            </fieldset>
+
+            <div class="modal-footer">
+            {{ form.submit(class = "submit_button") }}
+            <a href="{{ url_for('view_colleges') }}"><button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock content %}

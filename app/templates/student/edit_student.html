@@ -1,68 +1,74 @@
+{% extends 'layout.html' %}
 {% block content %}
-	  <!-- Button trigger modal -->
 
-<!-- Modal -->
-<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content container-fluid">
-      <div class="modal-header">
+    <div class="_navbar">
+        <img src = "{{ url_for('static',filename = 'img/SSiS.png') }}" class = "imglogo">
+            <nav>
+                <ul class="nav justify-content-end" style="padding-right: 13%;padding-top: 15px;">
+                    <li class="nav-item aktibo">
+                        <a class="linka nav-link active_link" href="#">STUDENT</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="linka nav-link" href="{{ url_for('view_courses') }}">COURSES</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="linka nav-link" href="{{ url_for('view_colleges') }}">COLLEGES</a>
+                    </li>
+                </ul>
+            </nav>
+    </div>
+       
 
-        <h1 class="legend" style="font-size: 24pt;">Add a Student</h1>
-        
-      </div>
-
-
-        <form action ="/add_student" method="POST" >
+<div class="container-fluid">
+    <div class="container update_div" style="width: 40%">
+        <div class="container" style="text-align: center;">
+            <h1>Update Student</h1>
+        </div>
+            <form action ="edit_student" method="POST" >
                 {{ form.hidden_tag() }}
             
-            <fieldset style="border: none;" >
-                <div>
-                    {{ form.first_name.label(class = "field_label0") }}
-                    {{ form.first_name(class = "field") }}
-                </div>
-                <div>
-                    {{ form.last_name(class = "field_ln") }}
-                </div>
-                <div >
-                    {{ form.id_number.label(class = "field_label0") }}
-                    {{ form.id_number(class = "field") }}
-                </div>
-                <div>                    
-                    {{ form.course.label(class = "field_label0") }}
-                    {{ form.course(class = "field") }}
-                </div>
-                <div>
-                    {{ form.year_level.label(class = "field_label0") }}
-                    {{ form.year_level(class = "field") }}
-                </div>
-               
-                <div>
-                    {{ form.gender.label(class = "field_label0") }}
+                <fieldset style="border: none;" >
+                    <div style="display: none;">                    
+                        {{ form.id_number.label(class = "field_label0") }}
+                        {{ form.id_number(class = "field") }}
+                    </div>
+                    <div>
+                        {{ form.first_name.label(class = "field_label0") }}
+                        {{ form.first_name(class = "field") }}
+                    </div>
+                    <div>
+                        {{ form.last_name(class = "field_ln") }}
+                    </div>
+                    <div>                    
+                        {{ form.course.label(class = "field_label0") }}
+                        {{ form.course(class = "field") }}
+                    </div>
+                    <div>
+                        {{ form.year_level.label(class = "field_label0") }}
+                        {{ form.year_level(class = "field") }}
+                    </div>
+                    <div>
+                        {{ form.gender.label(class = "field_label0") }}
                     <br>
-                	{% for subfield in form.gender %}
-					<tr>
-    					<td>{{ subfield }}</td>
-    					<td>{{ subfield.label(class="radio") }}</td>
-					</tr>
-					{% endfor %}
+                    {% for subfield in form.gender %}
+                        <tr>
+                            <td>{{ subfield }}</td>
+                            <td>{{ subfield.label(class="radio") }}</td>
+                        </tr>
+                    {% endfor %}
                     <br>
                     <br>
                     
+                    </div>
+                </fieldset>
+                <div class="modal-footer">
+                    {{ form.submit(class = "submit_button") }}
+                    <a href="{{ url_for('view_students') }}">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    </a>
                 </div>
-               
-            
-           		
-            
-            </fieldset>
+            </form>
+        </div>    
+</div>   
 
-            <div class="modal-footer">
-                {{ form.submit(class = "submit_button") }}
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-        </form>
-        
-      </div>
-    </div>
-  </div>
-</div>
 {% endblock content %}

@@ -48,8 +48,13 @@
                     <td style="padding-left: 60px;" scope="row">{{ item['college_code'] }}</td>
                     <td>{{ item['college_name'] }}</td>
                     <td>
-
-                        <button onclick="edit_student()" class="btn btn-outline-primary rounded" style="padding: 5px 10px 5px 10px;">Update</button>
+                        <a 
+                        style="text-decoration: none" 
+                        href="{{ url_for('edit_college',college_code = item['college_code']) }}">
+                        <button 
+                        class="btn btn-outline-primary rounded" 
+                        style="padding: 5px 10px 5px 10px;">Update</button>
+                        </a>
                         <button onclick="del_student()" 
                         class="btn btn-outline-danger rounded" 
                         data-toggle="modal" 

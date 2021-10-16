@@ -1,6 +1,7 @@
 {% extends 'layout.html' %}
 {% include 'course/add_courses.html' %}
 {% block content %}
+
     <div class="_navbar">
         <img src = "{{ url_for('static',filename = 'img/SSiS.png') }}" class = "imglogo">
         <nav>
@@ -18,22 +19,23 @@
             </ul>
         </nav>
     </div>
+
     <div class="add_student">
         <button class="add_student_btn"  data-toggle="modal" data-target="#exampleModal">Add Course</button>
     </div>
     <div class="search_actions">
         <form action="" method="POST">
             <fieldset>
-        <div>
-            {{ search_form.search_field(class="search_field") }}
-        </div>
-        <div>
-            {{ search_form.search_by.label(class="search_by_label") }}
-            {{ search_form.search_by(class="college_search_by") }}
-        </div>
-        <div>
-            {{ search_form.search_submit(class="search_submit_btn") }}
-        </div>
+            <div>
+                {{ search_form.search_field(class="search_field") }}
+            </div>
+            <div>
+                {{ search_form.search_by.label(class="search_by_label") }}
+                {{ search_form.search_by(class="college_search_by") }}
+            </div>
+            <div>
+                {{ search_form.search_submit(class="search_submit_btn") }}
+            </div>
             </fieldset>
         </form>
     </div>
@@ -53,9 +55,14 @@
                     <td style="padding-left: 60px;" scope="row">{{ item['course_code'] }}</td>
                     <td>{{ item['course_name'] }}</td>
                     <td>{{ item['course_college'] }}</td>
-                    <td><button onclick="edit_student()" 
+                    <td>
+                        <a 
+                        style="text-decoration: none" 
+                        href="{{ url_for('edit_course',course_code = item['course_code']) }}">
+                        <button 
                         class="btn btn-outline-primary rounded" 
-                        style="padding: 5px 10px 5px 10px;">Update</button> 
+                        style="padding: 5px 10px 5px 10px;">Update</button>
+                        </a>
                     <button onclick="del_student()" 
                         class="btn btn-outline-danger rounded" 
                         data-toggle="modal" 
@@ -87,11 +94,8 @@
                     </td>
                 </tr>
                 {% endfor %}
-                
-
-        </tbody>
-        
+        </tbody> 
     </table>
-  </div>
+    </div>
 
 {% endblock content %}
