@@ -1,21 +1,14 @@
 {% block content %}
-	  <!-- Button trigger modal -->
-
-<!-- Modal -->
+	  
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
-    <div class="modal-content container-fluid">
-      <div class="modal-header">
-
-        <h1 class="legend" style="font-size: 24pt;">Add a College</h1>
-        
-      </div>
-
-
+      <div class="modal-content container-fluid">
+        <div class="modal-header">
+          <h1 class="legend" style="font-size: 24pt;">Add a College</h1>
+        </div>
         <form action ="/add_college" method="POST" >
-                {{ form.hidden_tag() }}
-            
-            <fieldset style="border: none;" >
+            {{ form.hidden_tag() }}
+              <fieldset style="border: none;" >
                 <div>
                     {{ form.college_code.label(class = "field_label0") }}
                     {{ form.college_code(class = "field") }}
@@ -24,19 +17,12 @@
                     {{ form.college_name.label(class = "field_label0") }}
                     {{ form.college_name(class = "field") }}
                 </div>
-                
-               
-            
-           		
-            
             </fieldset>
-
             <div class="modal-footer">
-                {{ form.submit(class = "submit_button") }}
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
+              {{ form.submit(class = "submit_button") }}
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
         </form>
-        
       </div>
     </div>
   </div>

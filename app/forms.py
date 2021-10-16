@@ -28,7 +28,6 @@ class StudentForm(FlaskForm):
 							choices = [('Male', 'Male'), ('Female', 'Female')])
 	submit = SubmitField('Submit')
 	
-
 class CoursesForm(FlaskForm):
 	course_code = StringField('Course Code', 
 							validators=[DataRequired(), Length(min=3, max =15)])
