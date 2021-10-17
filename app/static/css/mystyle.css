@@ -1,4 +1,3 @@
-
 .sb-site-container{
 	background-color: #ffeeed;
 }
@@ -10,17 +9,8 @@
 	box-shadow: 0px 0px 15px grey;
 }
 
-
-
-
 .my-custom-scrollbar {
 position: relative;
-
-}
-
-.table-wrapper-scroll-y{
-	//display: block;
-
 }
 
 .imglogo{
@@ -34,29 +24,24 @@ position: relative;
 }
 
 .nav-item{
-
 	font-family: helvetica;
 	font-weight: bold;
-
 }
 
 .nav-link{
 	color: #fff;
-
-
 }
+
 .linka:first-child{
 	color: #fff ;
 	padding-left:30px;
 	padding-right:30px;
 }
 
-
 .data_list{
 	width: 1000px;
 	height: 400px;
 	background-color: #fff;
-	//position: absolute;
 	box-shadow: 2px 2px 20px 0px #d1d1d1;
 	margin-left: 13%;
 	margin-top: 10%;
@@ -80,13 +65,11 @@ th{
 .linka:hover:first-child{
 	color: #ffe49c;
 	border-bottom: 5px solid #ffe49c;
-
 }
 
 .search_actions{
 	height: 70px;
 	width: 400px;
-	//border: 2px solid black;
 	position: absolute;
 	margin-top: 5%;
 	margin-left: 57%;
@@ -131,13 +114,11 @@ th{
 	position: absolute;
 }
 
-
 .search_by_label{
 	position: absolute;
 	font-style: italic;
 	margin-top: 8%;
 	margin-left: 15%;
-	//font-size: 8pt;
 	color: grey;
 }
 
@@ -158,7 +139,6 @@ th{
 	margin-top: 8%;
 	display: inline-block;
 }
-
 
 .add_student_btn{
 	width: 160px;
@@ -191,8 +171,6 @@ th{
 	position: absolute;
 }
 
-
-
 .labelous{
 	font-family: arial;
 	font-weight: bold;
@@ -211,7 +189,6 @@ th{
 	background-color: #f5f5ff;
 }
 
-
 .field_ln{
 	border-radius: 5px;
 	border-style: none;
@@ -225,7 +202,6 @@ th{
 	background-color: #f5f5ff;
 }
 
-
 .submit_button{
 	width: 100px;
 	height: 38px;
@@ -233,9 +209,7 @@ th{
 	border-style: none;
 	background-color: #632521;
 	color: white;
-
 }
-
 
 .submit_button:hover{
 	width: 100px;
@@ -248,7 +222,6 @@ th{
 
 }
 
-
 .legend{
 	font-family: arial;
 	font-weight: bold;
@@ -256,6 +229,7 @@ th{
 	font-size: 24pt;
 	margin-left: 26%;
 }
+
 .radio{
 	font-family: helvetica;
 	color: #454545;
