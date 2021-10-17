@@ -45,7 +45,6 @@ class CollegeForm(FlaskForm):
 	submit = SubmitField('Submit')
 
 
-
 class SearchStudentForm(FlaskForm):
 	search_field = StringField(label='search',
 						validators=[DataRequired()],)

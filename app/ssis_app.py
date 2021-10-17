@@ -36,11 +36,7 @@ def view_courses():
 	cur = mysql.connection.cursor()
 	cur.execute(''' SELECT * FROM course ''')
 	courses_data = cur.fetchall()
-	cur = mysql.connection.cursor()
-	cur.execute(''' SELECT college_code, college_name FROM college ''')
-	colleges = cur.fetchall()
-	college_options = [tuple(college.values()) for college in colleges]
-	form.college.choices = college_options
+	form.college.choices = college_options()
 	return render_template('course/view_courses.html', 
 							courses_data=courses_data,
 							form=form,
@@ -57,6 +53,7 @@ def view_colleges():
 							colleges_data=colleges_data,
 							form=form,
 							search_form=search_form)
+
 
 @app.route('/add_student',  methods=["POST", "GET"])
 def add_student():
@@ -206,7 +203,6 @@ def edit_college(college_code):
 							form = form)
 
 
-
 @app.route('/del_student/<id_number>', methods=["POST", "GET"])
 def del_student(id_number):
 	form = StudentForm()
@@ -214,7 +210,7 @@ def del_student(id_number):
 	cursor.execute("DELETE FROM students WHERE id_number = %s", (id_number,))
 	cursor.close()
 	mysql.connection.commit()
-	flash("Student deleted, successfully!", 
+	flash("Student has been deleted, successfully!", 
           "danger")
 	return redirect((url_for("view_students")))
 
@@ -224,7 +220,7 @@ def del_course(course_code):
 	cursor.execute("DELETE FROM course WHERE course_code = %s", (course_code,))
 	cursor.close()
 	mysql.connection.commit()
-	flash("Course deleted, successfully!", 
+	flash("Course has been deleted, successfully!", 
           "danger")
 	return redirect((url_for("view_courses")))
 
@@ -234,7 +230,7 @@ def del_college(college_code):
 	cursor.execute("DELETE FROM college WHERE college_code = %s", (college_code,))
 	cursor.close()
 	mysql.connection.commit()
-	flash("College deleted, successfully!", 
+	flash("College has been deleted, successfully!", 
           "danger")
 	return redirect((url_for("view_colleges")))
 
@@ -272,10 +268,13 @@ def student_search():
 	if(searchby == 'gender'):
 		cursor.execute(''' SELECT * FROM students WHERE gender REGEXP %s ''', [field])
 		students_data = cursor.fetchall()
+	flash("Search results for \" {} \"".format(field), 
+          "success")
 	return render_template('student/view_students.html', 
 							students_data=students_data,
 							search_form=search_form,
-							form=form) 
+							form=form,
+							title='Search Results') 
 
 @app.route('/course_search', methods=["POST", "GET"])
 def course_search():
@@ -298,10 +297,13 @@ def course_search():
 	if(searchby == 'course_college'):
 		cursor.execute(''' SELECT * FROM course WHERE course_college REGEXP %s ''', [field])
 		courses_data = cursor.fetchall()
+	flash("Search results for \" {} \"".format(field), 
+          "success")
 	return render_template('course/view_courses.html', 
 							courses_data=courses_data,
 							search_form=search_form,
-							form=form) 
+							form=form,
+							title='Search Results') 
 
 @app.route('/college_search', methods=["POST", "GET"])
 def college_search():
@@ -320,10 +322,14 @@ def college_search():
 	if(searchby == 'college_name'):
 		cursor.execute(''' SELECT * FROM college WHERE college_name REGEXP %s ''', [field])
 		colleges_data = cursor.fetchall()
+	flash("Search results for \" {} \"".format(field), 
+          "success")
 	return render_template('college/view_colleges.html', 
 							colleges_data=colleges_data,
 							search_form=search_form,
-							form=form) 
+							form=form,
+							title='Search Results') 
+
 
 def course_options():
 	cursor = mysql.connection.cursor()
@@ -338,10 +344,6 @@ def college_options():
 	colleges = cursor.fetchall()
 	options = [tuple(college.values()) for college in colleges]
 	return options
-
-
-
-
 
 
 if __name__=='__main__':
