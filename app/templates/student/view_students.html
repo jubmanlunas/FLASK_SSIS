@@ -23,7 +23,10 @@
     <div class="add_student">
         <button class="add_student_btn" data-toggle="modal" data-target="#exampleModal">Add Student</button>
     </div>
+
     <div class="search_actions">
+        <form action="student_search" method="POST">
+        <fieldset>
         <div>
             {{ search_form.search_field(class="search_field") }}
         </div>
@@ -34,6 +37,8 @@
         <div>
             {{ search_form.search_submit(class="search_submit_btn") }}
         </div>
+        </fieldset>
+        </form>
     </div>
 	<div class="data_list bodybg">
   	     <table id="example" 

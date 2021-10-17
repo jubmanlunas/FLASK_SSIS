@@ -20,11 +20,8 @@ mysql = MySQL(app)
 def view_students():
 	form = StudentForm()
 	search_form = SearchStudentForm()
+	form.course.choices = course_options()
 	cur = mysql.connection.cursor()
-	cur.execute(''' SELECT course_code, course_name FROM course ''')
-	courses = cur.fetchall()
-	course_options = [tuple(course.values()) for course in courses]
-	form.course.choices = course_options
 	cur.execute(''' SELECT * FROM students ''')
 	students_data = cur.fetchall()
 	return render_template('student/view_students.html', 
@@ -242,6 +239,92 @@ def del_college(college_code):
 	return redirect((url_for("view_colleges")))
 
 
+@app.route('/student_search', methods=["POST", "GET"])
+def student_search():
+	search_form = SearchStudentForm()
+	form = StudentForm()
+	field = search_form.search_field.data
+	searchby = search_form.search_by.data
+	cursor = mysql.connection.cursor()
+	if(searchby == 'all'):
+		cursor.execute(''' SELECT * FROM students WHERE id_number REGEXP %s or 
+														first_name REGEXP %s or 
+														last_name REGEXP %s or 
+														course REGEXP %s or
+														year_level REGEXP %s or
+														gender REGEXP %s ''', ([field], [field], [field], [field], [field], [field]))
+		students_data = cursor.fetchall()
+	if(searchby == 'id_number'):
+		cursor.execute(''' SELECT * FROM students WHERE id_number REGEXP %s ''', [field])
+		students_data = cursor.fetchall()
+	if(searchby == 'first_name'):
+		cursor.execute(''' SELECT * FROM students WHERE first_name REGEXP %s ''', [field])
+		students_data = cursor.fetchall()
+	if(searchby == 'last_name'):
+		cursor.execute(''' SELECT * FROM students WHERE last_name REGEXP %s ''', [field])
+		students_data = cursor.fetchall()
+	if(searchby == 'course'):
+		cursor.execute(''' SELECT * FROM students WHERE course REGEXP %s ''', [field])
+		students_data = cursor.fetchall()
+	if(searchby == 'yr_level'):
+		cursor.execute(''' SELECT * FROM students WHERE year_level REGEXP %s ''', [field])
+		students_data = cursor.fetchall()
+	if(searchby == 'gender'):
+		cursor.execute(''' SELECT * FROM students WHERE gender REGEXP %s ''', [field])
+		students_data = cursor.fetchall()
+	return render_template('student/view_students.html', 
+							students_data=students_data,
+							search_form=search_form,
+							form=form) 
+
+@app.route('/course_search', methods=["POST", "GET"])
+def course_search():
+	search_form = SearchCourseForm()
+	form = CoursesForm()
+	field = search_form.search_field.data
+	searchby = search_form.search_by.data
+	cursor = mysql.connection.cursor()
+	if(searchby == 'all'):
+		cursor.execute(''' SELECT * FROM course WHERE course_code REGEXP %s or 
+														course_name REGEXP %s or 
+														course_college REGEXP %s ''', ([field], [field], [field]))
+		courses_data = cursor.fetchall()
+	if(searchby == 'course_code'):
+		cursor.execute(''' SELECT * FROM course WHERE course_code REGEXP %s ''', [field])
+		courses_data = cursor.fetchall()
+	if(searchby == 'course_name'):
+		cursor.execute(''' SELECT * FROM course WHERE course_name REGEXP %s ''', [field])
+		courses_data = cursor.fetchall()
+	if(searchby == 'course_college'):
+		cursor.execute(''' SELECT * FROM course WHERE course_college REGEXP %s ''', [field])
+		courses_data = cursor.fetchall()
+	return render_template('course/view_courses.html', 
+							courses_data=courses_data,
+							search_form=search_form,
+							form=form) 
+
+@app.route('/college_search', methods=["POST", "GET"])
+def college_search():
+	search_form = SearchCollegeForm()
+	form = CollegeForm()
+	field = search_form.search_field.data
+	searchby = search_form.search_by.data
+	cursor = mysql.connection.cursor()
+	if(searchby == 'all'):
+		cursor.execute(''' SELECT * FROM college WHERE college_code REGEXP %s or 
+														college_name REGEXP %s ''', ([field], [field]))
+		colleges_data = cursor.fetchall()
+	if(searchby == 'college_code'):
+		cursor.execute(''' SELECT * FROM college WHERE college_code REGEXP %s ''', [field])
+		colleges_data = cursor.fetchall()
+	if(searchby == 'college_name'):
+		cursor.execute(''' SELECT * FROM college WHERE college_name REGEXP %s ''', [field])
+		colleges_data = cursor.fetchall()
+	return render_template('college/view_colleges.html', 
+							colleges_data=colleges_data,
+							search_form=search_form,
+							form=form) 
+
 def course_options():
 	cursor = mysql.connection.cursor()
 	cursor.execute(''' SELECT course_code, course_name FROM course ''')
@@ -255,6 +338,10 @@ def college_options():
 	colleges = cursor.fetchall()
 	options = [tuple(college.values()) for college in colleges]
 	return options
+
+
+
+
 
 
 if __name__=='__main__':

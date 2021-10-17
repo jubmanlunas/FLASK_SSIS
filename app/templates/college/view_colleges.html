@@ -22,16 +22,20 @@
         <button class="add_student_btn" data-toggle="modal" data-target="#exampleModal">Add College</button>
     </div>
     <div class="search_actions">
-        <div>
-            {{ search_form.search_field(class="search_field") }}
-        </div>
-        <div>
-            {{ search_form.search_by.label(class="search_by_label") }}
-            {{ search_form.search_by(class="college_search_by") }}
-        </div>
-        <div>
-            {{ search_form.search_submit(class="search_submit_btn") }}
-        </div>
+        <form action="college_search" method="POST">
+            <fieldset>
+                <div>
+                    {{ search_form.search_field(class="search_field") }}
+                </div>
+                <div>
+                    {{ search_form.search_by.label(class="search_by_label") }}
+                    {{ search_form.search_by(class="college_search_by") }}
+                </div>
+                <div>
+                    {{ search_form.search_submit(class="search_submit_btn") }}
+                 </div>
+            </fieldset>
+        </form>
     </div>
     <div class="data_list bodybg">
      <table id="example" class="table table-bordered table-responsive table-striped table-wrapper-scroll-y my-custom-scrollbar" style="width:100%">
