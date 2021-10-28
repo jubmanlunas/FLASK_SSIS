@@ -1,19 +1,6 @@
-from flask import Flask, render_template, url_for, flash, redirect, request
-from forms import *
-from flask_mysqldb import MySQL
-
-
-app = Flask(__name__)
-
-app.config['SECRET_KEY'] = '6db52b5de40105e38bb4f3951b7c3303'
-
-app.config['MYSQL_HOST'] = 'localhost'
-app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'gigatt02'
-app.config['MYSQL_DB'] = 'ssis_db'
-app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
-
-mysql = MySQL(app)
+from flask import render_template, url_for, flash, redirect, request
+from app.forms import *
+from app import app, mysql
 
 @app.route('/')
 @app.route('/view_students', methods=["POST", "GET"])
@@ -346,5 +333,3 @@ def college_options():
 	return options
 
 
-if __name__=='__main__':
-	app.run(debug=True)
