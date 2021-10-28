@@ -31,15 +31,7 @@
                
                 <div>
                     {{ form.gender.label(class = "field_label0") }}
-                    <br>
-                	{% for subfield in form.gender %}
-					<tr>
-    					<td>{{ subfield }}</td>
-    					<td>{{ subfield.label(class="radio") }}</td>
-					</tr>
-					{% endfor %}
-                    <br>
-                    <br>
+                    {{ form.gender(class = "field") }}
                 </div>
             </fieldset>
             <div class="modal-footer">

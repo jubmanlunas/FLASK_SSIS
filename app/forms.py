@@ -23,9 +23,8 @@ class StudentForm(FlaskForm):
 									 ('3rd Year', '3rd Year'), 
 									 ('4th Year', '4th Year'),
 									 ('5th Year', '5th Year')])
-	gender = RadioField('Sex',
-							validators=[InputRequired()],
-							choices = [('Male', 'Male'), ('Female', 'Female')])
+	gender = StringField('Gender',
+							validators=[InputRequired(), Length(min=4, max=45)])
 	submit = SubmitField('Submit')
 	
 class CoursesForm(FlaskForm):
