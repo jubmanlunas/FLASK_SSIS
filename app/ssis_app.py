@@ -1,5 +1,5 @@
 from flask import render_template, url_for, flash, redirect, request
-from app.forms import *
+from app.forms import StudentForm, CollegeForm, CoursesForm, SearchStudentForm, SearchCourseForm, SearchCollegeForm
 from app import app, mysql
 
 @app.route('/')
@@ -56,10 +56,10 @@ def add_student():
 		cur = mysql.connection.cursor()
 		cur.execute(''' INSERT INTO students VALUES(%s,%s,%s,%s,%s,%s) ''',(id_number,first_name, last_name, course, yr_level, gender))
 		mysql.connection.commit()
-		flash("Student has been added, successfully!", "success")
+		flash("Student {} has been added, successfully!".format(id_number), "success")
 		return redirect(url_for('view_students'))
 		cur.close()
-	return render_template('student/view_students.html', title = 'Add Student', form = form)
+	return render_template('student/view_students.html', title='Add Student', form=form)
 
 @app.route('/add_course',  methods=["POST", "GET"])
 def add_course():
@@ -109,12 +109,13 @@ def edit_student(id_number):
 		yr_level = form.year_level.data
 		gender = form.gender.data
 		cur = mysql.connection.cursor()
-		cur.execute(''' UPDATE students SET first_name = %s, 
+		cur.execute(''' UPDATE students SET id_number = %s,
+											first_name = %s, 
 											last_name = %s, 
 											course = %s, 
 											year_level = %s, 
 											gender = %s 
-										WHERE id_number = %s ''',(first_name, last_name, course, yr_level, gender, id_))
+										WHERE id_number = %s ''',(id_, first_name, last_name, course, yr_level, gender, id_number))
 		mysql.connection.commit()
 		flash("Student has been updated, successfully!", "success")
 		return redirect(url_for('view_students'))
@@ -197,7 +198,7 @@ def del_student(id_number):
 	cursor.execute("DELETE FROM students WHERE id_number = %s", (id_number,))
 	cursor.close()
 	mysql.connection.commit()
-	flash("Student has been deleted, successfully!", 
+	flash("{}'s record has been deleted, successfully!".format(id_number), 
           "danger")
 	return redirect((url_for("view_students")))
 
@@ -207,7 +208,7 @@ def del_course(course_code):
 	cursor.execute("DELETE FROM course WHERE course_code = %s", (course_code,))
 	cursor.close()
 	mysql.connection.commit()
-	flash("Course has been deleted, successfully!", 
+	flash("{} course has been deleted, successfully!".format(course_code), 
           "danger")
 	return redirect((url_for("view_courses")))
 
