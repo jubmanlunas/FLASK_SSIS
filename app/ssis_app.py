@@ -51,10 +51,10 @@ def add_student():
 		first_name = form.first_name.data
 		last_name = form.last_name.data
 		course = form.course.data
-		yr_level = form.year_level.data
+		year_level = form.year_level.data
 		gender = form.gender.data
 		cur = mysql.connection.cursor()
-		cur.execute(''' INSERT INTO students VALUES(%s,%s,%s,%s,%s,%s) ''',(id_number,first_name, last_name, course, yr_level, gender))
+		cur.execute(''' INSERT INTO students VALUES(%s,%s,%s,%s,%s,%s) ''',(id_number,first_name, last_name, course, year_level, gender))
 		mysql.connection.commit()
 		flash("Student {} has been added, successfully!".format(id_number), "success")
 		return redirect(url_for('view_students'))
@@ -106,7 +106,7 @@ def edit_student(id_number):
 		last_name = form.last_name.data
 		id_ = form.id_number.data
 		course = form.course.data
-		yr_level = form.year_level.data
+		year_level = form.year_level.data
 		gender = form.gender.data
 		cur = mysql.connection.cursor()
 		cur.execute(''' UPDATE students SET id_number = %s,
@@ -115,7 +115,7 @@ def edit_student(id_number):
 											course = %s, 
 											year_level = %s, 
 											gender = %s 
-										WHERE id_number = %s ''',(id_, first_name, last_name, course, yr_level, gender, id_number))
+										WHERE id_number = %s ''',(id_, first_name, last_name, course, year_level, gender, id_))
 		mysql.connection.commit()
 		flash("Student has been updated, successfully!", "success")
 		return redirect(url_for('view_students'))
